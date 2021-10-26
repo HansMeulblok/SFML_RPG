@@ -7,6 +7,7 @@ class GameState : public State
 	
 private:
 	Entity player;
+	sf::Vector2f playerDir;
 
 	// Functions
 	void initkeyBinds();

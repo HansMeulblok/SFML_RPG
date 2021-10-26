@@ -1,8 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "GameState.h"
-
+#include "MainMenuState.h"
 
 
 // Class that acts as the game egnine / wrapper class.

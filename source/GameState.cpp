@@ -40,24 +40,39 @@ void GameState::updateInput(const float& dt)
 {
 	this->getEnding();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_UP"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_UP"))) && this->playerDir.x == 0)
 	{
 		this->player.move(dt, 0.f, -1.f);
+		this->playerDir = sf::Vector2f(0.f, -1.f);
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_LEFT"))))
-	{
-		this->player.move(dt, -1.f, 0.f);
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_DOWN"))))
+	else
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_DOWN"))) && this->playerDir.x == 0)
 	{
 		this->player.move(dt, 0.f, 1.f);
+		this->playerDir = sf::Vector2f(0.f, 1.f);
+
+	}
+	else
+	{
+		this->playerDir = sf::Vector2f(0.f, 0.f);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_RIGHT"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_LEFT"))) && this->playerDir.y == 0)
+	{
+		this->player.move(dt, -1.f, 0.f);
+		this->playerDir = sf::Vector2f(-1.f, 0.f);
+
+	}
+	else
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_RIGHT"))) && this->playerDir.y == 0)
 	{
 		this->player.move(dt, 1.f, 0.f);
+		this->playerDir = sf::Vector2f(1.f, 0.f);
+
+	}
+	else
+	{
+		this->playerDir = sf::Vector2f(0.f, 0.f);
 	}
 }
 
