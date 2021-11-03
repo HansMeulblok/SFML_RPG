@@ -1,5 +1,13 @@
 #include "MainMenuState.h"
 
+void MainMenuState::initFonts()
+{
+	if (!this->font.loadFromFile("fonts/8-BIT WONDER.ttf"))
+	{
+		throw("Could not load font");
+	}
+}
+
 void MainMenuState::initkeyBinds()
 {
 	std::ifstream ifs("Config/gamestate_keybinds.ini");
@@ -22,14 +30,19 @@ void MainMenuState::initkeyBinds()
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys)
 	: State(window, supportedKeys)
 {
+	this->initFonts();
 	this->initkeyBinds();
+
+	this->gamestate_btn = new Button(100, 100, 150, 50, &this->font, "New Game", 
+		sf::Color(191, 166, 84), sf::Color(250, 217, 107), sf::Color(133, 115, 58));
+
 	this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
 	this->background.setFillColor(sf::Color::Black);
 }
 
 MainMenuState::~MainMenuState()
 {
-
+	delete this->gamestate_btn;
 }
 
 
@@ -52,7 +65,10 @@ void MainMenuState::updateInput(const float& dt)
 
 void MainMenuState::update(const float& dt)
 {
+	this->updateMousePositions();
 	this->updateInput(dt);
+	this->gamestate_btn->update(this->mousePosView);
+
 
 }
 
@@ -68,4 +84,5 @@ void MainMenuState::render(sf::RenderTarget* target)
 	}
 
 	target->draw(this->background);
+	this->gamestate_btn->render(target);
 }
