@@ -13,6 +13,9 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event ev;
+	std::vector<sf::VideoMode> videoModes;
+	sf::ContextSettings windowSettings;
+	bool fullScreen = false;
 
 	sf::Clock dtClock;
 	float dt;
