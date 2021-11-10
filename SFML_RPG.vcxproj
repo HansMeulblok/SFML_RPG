@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Player.cpp" />
     <ClCompile Include="source\Button.cpp" />
     <ClCompile Include="source\Entity.cpp" />
     <ClCompile Include="source\Game.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="include\GameState.h" />
     <ClInclude Include="include\MainMenuState.h" />
     <ClInclude Include="include\State.h" />
+    <ClInclude Include="include\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

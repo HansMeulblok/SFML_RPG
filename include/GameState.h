@@ -6,17 +6,18 @@ class GameState : public State
 {
 	
 private:
-	Entity player;
+	Player* player;
 	sf::Vector2f playerDir;
 
 	// Functions
 	void initkeyBinds();
+	void initTextures();
+	void initPlayers();
 public:
 	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~GameState();
 
 	// functions
-	void endState();
 
 	void updateInput(const float& dt);
 

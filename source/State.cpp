@@ -18,20 +18,7 @@ const bool& State::getEnding() const
 	return this->isEnding;
 }
 
-void State::checkEnd()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("CLOSE"))))
-	{
-		this->endGame();
-	}
-}
-
 void State::endState()
-{
-
-}
-
-void State::endGame()
 {
 	this->isEnding = true;
 }
