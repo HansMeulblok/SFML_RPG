@@ -1,22 +1,25 @@
 #pragma once
 #include "Movement.h"
+#include "AnimationComponent.h"
 
 class Entity
 {
 private:
 	void initVariables();
 protected:
-	sf::Sprite* sprite;
-	sf::Texture* texture;
+	sf::Sprite sprite;
+
 	Movement* movement;
+	AnimationComponent* animationComponent;
 
 public:
 	Entity();
 	virtual ~Entity();
 
 	// component functions
-	void createSprite(sf::Texture* texture);
+	void setTexture(sf::Texture& texture);
 	void createMovement(const float maxVelocity);
+	void createAnimation( sf::Texture& texture_sheet);
 	// functions
 	virtual void setPosition(const float x, const float y);
 	virtual void move(const float& dt, const float x, const float y);
