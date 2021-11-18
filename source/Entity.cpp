@@ -3,6 +3,7 @@
 void Entity::initVariables()
 {
 	this->movement = NULL;
+	this->animationComponent = NULL;
 }
 
 Entity::Entity()

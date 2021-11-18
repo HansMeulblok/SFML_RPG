@@ -21,7 +21,7 @@ void GameState::initkeyBinds()
 
 void GameState::initTextures()
 {
-	if (!this->textures["PLAYER_IDLE"].loadFromFile("resources/Images/Player/Mummy_idle.png"))
+	if (!this->textures["PLAYER_IDLE"].loadFromFile("resources/Images/Player/mummy_sheet.png"))
 	{
 		throw "ERROR:GAMESTATE: Could not load texture";
 	}
@@ -45,42 +45,49 @@ GameState::~GameState()
 	delete this->player;
 }
 
+bool isMovingVertical;
+bool isMovingHorizontal;
+bool wasMovingVertical;
+
 void GameState::updateInput(const float& dt)
 {
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_UP"))) && this->playerDir.x == 0)
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_UP"))) && !isMovingHorizontal)
 	{
+		isMovingVertical = true;
 		this->player->move(dt, 0.f, -1.f);
-		this->playerDir = sf::Vector2f(0.f, -1.f);
 	}
 	else
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_DOWN"))) && this->playerDir.x == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_DOWN"))) && !isMovingHorizontal)
 	{
+		isMovingVertical = true;
 		this->player->move(dt, 0.f, 1.f);
-		this->playerDir = sf::Vector2f(0.f, 1.f);
-
 	}
 	else
 	{
-		this->playerDir = sf::Vector2f(0.f, 0.f);
+		isMovingVertical = false;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_LEFT"))) && this->playerDir.y == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_LEFT"))) && !isMovingVertical)
 	{
+		isMovingHorizontal = true;
 		this->player->move(dt, -1.f, 0.f);
-		this->playerDir = sf::Vector2f(-1.f, 0.f);
-
 	}
 	else
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_RIGHT"))) && this->playerDir.y == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("MOVE_RIGHT"))) && !isMovingVertical)
 	{
+		isMovingHorizontal = true;
 		this->player->move(dt, 1.f, 0.f);
-		this->playerDir = sf::Vector2f(1.f, 0.f);
-
 	}
 	else
 	{
-		this->playerDir = sf::Vector2f(0.f, 0.f);
+		isMovingHorizontal = false;
+	}
+
+
+	if(!isMovingHorizontal && !isMovingVertical)
+	{ 
+		this->player->move(dt, 0.f, 0.f);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("CLOSE"))))
