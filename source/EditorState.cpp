@@ -81,7 +81,7 @@ void EditorState::updateButtons()
 
 }
 
-void EditorState::renderButtons(sf::RenderTarget* target)
+void EditorState::renderButtons(sf::RenderTarget& target)
 {
 	for (auto& it : this->buttons)
 	{
@@ -109,7 +109,7 @@ void EditorState::render(sf::RenderTarget* target)
 	}
 
 
-	this->renderButtons(target);
+	this->renderButtons(*target);
 
 	//debug for positions
 	//sf::Text mouseText;

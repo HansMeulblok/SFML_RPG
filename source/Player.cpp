@@ -17,6 +17,7 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->setTexture(texture_sheet);
 	this->setPosition(x, y);
 
+	this->createHitbox(this->sprite, 24.f, 24.f, 24.f, 24.f);
 	this->createMovement(500.0f);
 	this->createAnimation(texture_sheet);
 	// change this
@@ -43,4 +44,6 @@ void Player::update(const float& dt)
 	{
 		this->animationComponent->play("WALK_LEFT", dt);
 	}
+
+	this->hitboxComponent->update();
 }

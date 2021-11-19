@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\HitboxComponent.cpp" />
     <ClCompile Include="source\EditorState.cpp" />
     <ClCompile Include="source\AnimationComponent.cpp" />
     <ClCompile Include="source\Movement.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="source\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\HitboxComponent.h" />
     <ClInclude Include="include\EditorState.h" />
     <ClInclude Include="include\AnimationComponent.h" />
     <ClInclude Include="include\Button.h" />
