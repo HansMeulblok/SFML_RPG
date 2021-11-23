@@ -28,6 +28,7 @@ public:
 	Movement(float maxVelocity, sf::Sprite& sprite);
 	virtual ~Movement();
 
+	const float& getMaxVelocity() const;
 	const sf::Vector2f& getVelocity() const;
 
 	const bool getState(const short unsigned state) const;
