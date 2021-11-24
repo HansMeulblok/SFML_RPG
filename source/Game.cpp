@@ -133,10 +133,10 @@ void Game::pollEvents()
             this->window->close();
             break;
         case::sf::Event::KeyPressed:
-            if (ev.key.code == sf::Keyboard::Key(this->supportedKeys.at("Escape")))
-            {
-                this->window->close();
-            }
+            //if (ev.key.code == sf::Keyboard::Key(this->supportedKeys.at("Escape")))
+            //{
+            //    this->window->close();
+            //}
             break;
         default:
             break;

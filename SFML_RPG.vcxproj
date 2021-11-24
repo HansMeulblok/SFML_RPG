@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\SettingsState.cpp" />
+    <ClCompile Include="source\PauseMenu.cpp" />
     <ClCompile Include="source\HitboxComponent.cpp" />
     <ClCompile Include="source\EditorState.cpp" />
     <ClCompile Include="source\AnimationComponent.cpp" />
@@ -170,6 +172,8 @@
     <ClInclude Include="include\State.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Movement.h" />
+    <ClInclude Include="include\PauseMenu.h" />
+    <ClInclude Include="include\SettingsState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

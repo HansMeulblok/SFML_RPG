@@ -1,60 +1,66 @@
-#include "Button.h"
+#include"Button.h"
 
-Button::Button(float x, float y, float width, float height, sf::Font* font,
-	std::string text, unsigned character_size, sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color, 
-	sf::Color idle_Colour, sf::Color hoover_Colour, sf::Color active_Colour)
+Button::Button(float x, float y, float width, float height,
+	sf::Font* font, std::string text, unsigned character_size,
+	sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
+	sf::Color idle_color, sf::Color hover_color, sf::Color active_color)
 {
 	this->buttonState = BTN_IDLE;
 
-	this->buttonShape.setPosition(sf::Vector2f(x, y));
-	this->buttonShape.setSize(sf::Vector2f(width, height));
-	this->buttonShape.setFillColor(idle_Colour);
+	this->shape.setPosition(sf::Vector2f(x, y));
+	this->shape.setSize(sf::Vector2f(width, height));
+	this->shape.setFillColor(idle_color);
 
-	this-> font = font;
-	this->buttontext.setFont(*this->font);
-	this->buttontext.setString(text);
-	this->buttontext.setFillColor(text_idle_color);
-	this->buttontext.setCharacterSize(character_size);
-
-	this->buttontext.setPosition(
-		this->buttonShape.getPosition().x + (this->buttonShape.getGlobalBounds().width / 2.f) - this->buttontext.getGlobalBounds().width / 2.f,
-		this->buttonShape.getPosition().y + (this->buttonShape.getGlobalBounds().height / 2.f) - this->buttontext.getGlobalBounds().height / 2.f
-		);
+	this->font = font;
+	this->text.setFont(*this->font);
+	this->text.setString(text);
+	this->text.setFillColor(text_idle_color);
+	this->text.setCharacterSize(character_size);
+	this->text.setPosition(
+		this->shape.getPosition().x + (this->shape.getGlobalBounds().width / 2.f) - this->text.getGlobalBounds().width / 2.f,
+		this->shape.getPosition().y + (this->shape.getGlobalBounds().height / 2.f) - this->text.getGlobalBounds().height / 2.f
+	);
 
 	this->textIdleColor = text_idle_color;
 	this->textHoverColor = text_hover_color;
 	this->textActiveColor = text_active_color;
 
-
-	this->idleColour = idle_Colour;
-	this->hoverColour = hoover_Colour;
-	this->activeColour = active_Colour;
-
+	this->idleColor = idle_color;
+	this->hoverColor = hover_color;
+	this->activeColor = active_color;
 }
 
 Button::~Button()
 {
+
 }
 
 const bool Button::isPressed() const
 {
 	if (this->buttonState == BTN_ACTIVE)
-	{
 		return true;
-	}
+
 	return false;
 }
 
-void Button::update(const sf::Vector2f mousePos)
+//Accessors
+
+
+//Functions
+
+void Button::update(const sf::Vector2f& mousePos)
 {
-	// Idle
+	/*Update the booleans for hover and pressed*/
+
+	//Idle
 	this->buttonState = BTN_IDLE;
-	 // hoover
-	if (this->buttonShape.getGlobalBounds().contains(mousePos))
+
+	//Hover
+	if (this->shape.getGlobalBounds().contains(mousePos))
 	{
 		this->buttonState = BTN_HOVER;
 
-		// pressed 
+		//Pressed
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
 			this->buttonState = BTN_ACTIVE;
@@ -64,27 +70,29 @@ void Button::update(const sf::Vector2f mousePos)
 	switch (this->buttonState)
 	{
 	case BTN_IDLE:
-		this->buttonShape.setFillColor(this->idleColour);
-		this->buttontext.setFillColor(this->textIdleColor);
+		this->shape.setFillColor(this->idleColor);
+		this->text.setFillColor(this->textIdleColor);
 		break;
+
 	case BTN_HOVER:
-		this->buttonShape.setFillColor(this->hoverColour);
-		this->buttontext.setFillColor(this->textHoverColor);
+		this->shape.setFillColor(this->hoverColor);
+		this->text.setFillColor(this->textHoverColor);
 		break;
+
 	case BTN_ACTIVE:
-		this->buttonShape.setFillColor(this->activeColour);
-		this->buttontext.setFillColor(this->textActiveColor);
+		this->shape.setFillColor(this->activeColor);
+		this->text.setFillColor(this->textActiveColor);
 		break;
 
 	default:
-		this->buttonShape.setFillColor(sf::Color::Red);
-		this->buttontext.setFillColor(this->textActiveColor);
+		this->shape.setFillColor(sf::Color::Red);
+		this->text.setFillColor(sf::Color::Blue);
 		break;
 	}
 }
 
 void Button::render(sf::RenderTarget& target)
 {
-	target.draw(this->buttonShape);
-	target.draw(this->buttontext);
+	target.draw(this->shape);
+	target.draw(this->text);
 }
