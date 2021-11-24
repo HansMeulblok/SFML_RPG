@@ -96,7 +96,7 @@ void SettingsState::updateButtons()
 	}
 
 	//Quit the game
-	if (this->buttons["EXIT_STATE"]->isPressed())
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("CLOSE"))))
 	{
 		this->endState();
 	}
