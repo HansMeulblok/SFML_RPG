@@ -8,7 +8,7 @@ State::State(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys
 	this->isEnding = false;
 	this->paused = false;
 	this->keytime = 0.f;
-	this->keytimeMax = 10.f;
+	this->keytimeMax = 20.f;
 }
 
 State::~State()

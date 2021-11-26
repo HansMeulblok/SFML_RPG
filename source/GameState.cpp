@@ -31,7 +31,7 @@ void GameState::initFonts()
 {
 	if (!this->font.loadFromFile("fonts/8-BIT WONDER.ttf"))
 	{
-		throw("ERROR:MAINMENUSTATE: could not load font");
+		throw("ERROR:GAMESTATE: could not load font");
 	}
 }
 
@@ -117,11 +117,6 @@ void GameState::updatePlayerInput(const float& dt)
 	{
 		this->player->move(dt, 0.f, 0.f);
 	}
-
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("CLOSE"))))
-	{
-		this->endState();
-	}*/
 }
 
 void GameState::updatePauseMenuButtons()
