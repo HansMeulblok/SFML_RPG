@@ -16,6 +16,9 @@ private:
 	std::map<std::string, GUI::Button*> buttons;
 	std::map<std::string, GUI::DropDownList*> dropDownLists;
 
+	sf::Text optionsText;
+	std::vector<sf::VideoMode> modes;
+
 
 	//Functions
 	void initVariables();
@@ -23,6 +26,7 @@ private:
 	void initFonts();
 	void initkeyBinds();
 	void initGui();
+	void initText();
 
 public:
 	SettingsState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
