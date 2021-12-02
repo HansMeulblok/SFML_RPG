@@ -159,6 +159,8 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\MainMenuState.cpp" />
     <ClCompile Include="source\State.cpp" />
+    <ClCompile Include="source\Tile.cpp" />
+    <ClCompile Include="source\TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\HitboxComponent.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="include\Movement.h" />
     <ClInclude Include="include\PauseMenu.h" />
     <ClInclude Include="include\SettingsState.h" />
+    <ClInclude Include="include\Tile.h" />
+    <ClInclude Include="include\TileMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
