@@ -1,13 +1,4 @@
 #pragma once
-#include<vector>
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Audio.hpp>
 
 class HitboxComponent
 {

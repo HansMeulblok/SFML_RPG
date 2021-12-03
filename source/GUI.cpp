@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include"GUI.h"
 
 GUI::Button::Button(float x, float y, float width, float height,

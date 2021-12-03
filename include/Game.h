@@ -3,7 +3,6 @@
 
 #include "MainMenuState.h"
 
-
 // Class that acts as the game egnine / wrapper class.
 
 class Game

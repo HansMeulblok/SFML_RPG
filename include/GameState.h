@@ -2,6 +2,8 @@
 #include "State.h"
 #include "Entity.h"
 #include "PauseMenu.h"
+#include "TileMap.h"
+
 
 class GameState : public State
 {
@@ -11,6 +13,7 @@ private:
 	sf::Vector2f playerDir;
 	sf::Font font;
 	PauseMenu* pmenu;
+	TileMap map;
 
 	// Functions
 	void initkeyBinds();

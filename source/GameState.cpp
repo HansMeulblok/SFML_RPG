@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "GameState.h"
 
 void GameState::initkeyBinds()
@@ -155,6 +156,7 @@ void GameState::render(sf::RenderTarget* target)
 	{
 		target = this->window;
 	}
+	this->map.render(*target);
 	this->player->render(*target);
 
 	if (this->paused) //Pause menu render
