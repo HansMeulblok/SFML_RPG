@@ -141,7 +141,9 @@ void SettingsState::updateGui(const float& dt)
 	if (this->buttons["APPLY"]->isPressed())
 	{
 		//TEST DEBUG
-		this->window->create(this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()], "test", sf::Style::Default);
+		this->gfxSettings.resolution = this->modes[this->dropDownLists["RESOLUTION"]->getActiveElementId()];
+
+		this->window->create(this->gfxSettings.resolution, this->gfxSettings.title, sf::Style::Default);
 	}
 
 	// Dropdown lists

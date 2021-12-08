@@ -9,6 +9,7 @@ class SettingsState :
 {
 private:
 	//Variables
+	GraphicsSettings gfxSettings;
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 	sf::Font font;

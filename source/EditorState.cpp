@@ -39,6 +39,14 @@ void EditorState::initkeyBinds()
 
 }
 
+void EditorState::initPauseMenu()
+{
+	this->pmenu = new PauseMenu(*this->window, this->font);
+
+	this->pmenu->addButton("QUIT", 600.f, "Quit");
+}
+
+
 void EditorState::initButtons()
 {
 
@@ -51,6 +59,7 @@ EditorState::EditorState(sf::RenderWindow* window, std::map<std::string, int>* s
 	this->initBackground();
 	this->initFonts();
 	this->initkeyBinds();
+	this->initPauseMenu();
 	this->initButtons();
 
 }
@@ -62,15 +71,26 @@ EditorState::~EditorState()
 	{
 		delete it->second;
 	}
+
+	delete pmenu;
 }
 
 
 void EditorState::updateInput(const float& dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("CLOSE"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keyBinds.at("CLOSE"))) && this->getKeytime())
 	{
-		this->endState();
+		if (!this->paused)
+			this->pauseState();
+		else
+			this->unPauseState();
 	}
+}
+
+void EditorState::updatePauseMenuButtons()
+{
+	if (this->pmenu->isButtonPressed("QUIT"))
+		this->endState();
 }
 
 void EditorState::updateButtons()
@@ -81,6 +101,7 @@ void EditorState::updateButtons()
 	}
 
 }
+
 
 void EditorState::renderButtons(sf::RenderTarget& target)
 {
@@ -93,9 +114,18 @@ void EditorState::renderButtons(sf::RenderTarget& target)
 void EditorState::update(const float& dt)
 {
 	this->updateMousePositions();
+	this->updateKeytime(dt);
 	this->updateInput(dt);
+	if (!this->paused) //Unpaused update
+	{
+		this->updateButtons();
+	}
+	else //Paused update
+	{
+		this->pmenu->update(this->mousePosView);
+		this->updatePauseMenuButtons();
+	}
 
-	this->updateButtons();
 }
 
 void EditorState::render(sf::RenderTarget* target)
@@ -112,14 +142,21 @@ void EditorState::render(sf::RenderTarget* target)
 
 	this->renderButtons(*target);
 
-	//debug for positions
-	//sf::Text mouseText;
-	//mouseText.setPosition(this->mousePosView);
-	//mouseText.setFont(this->font);
-	//mouseText.setCharacterSize(12);
-	//std::stringstream ss;
-	//ss << this->mousePosView.x << " " << this->mousePosView.y - 50;
-	//mouseText.setString(ss.str());
+	this->map.render(*target);
 
-	//target->draw(mouseText);
+	if (this->paused) //Pause menu render
+	{
+		this->pmenu->render(*target);
+	}
+
+	//debug for positions
+	sf::Text mouseText;
+	mouseText.setPosition(this->mousePosView);
+	mouseText.setFont(this->font);
+	mouseText.setCharacterSize(12);
+	std::stringstream ss;
+	ss << this->mousePosView.x << " " << this->mousePosView.y - 50;
+	mouseText.setString(ss.str());
+
+	target->draw(mouseText);
 }

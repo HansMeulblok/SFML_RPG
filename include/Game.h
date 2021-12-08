@@ -8,13 +8,13 @@
 class Game
 {
 private:
+	
 
+	GraphicsSettings graphicSettings;
 	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
 	sf::Event ev;
-	std::vector<sf::VideoMode> videoModes;
-	sf::ContextSettings windowSettings;
-	bool fullScreen = false;
+
+
 
 	sf::Clock dtClock;
 	float dt;
@@ -24,6 +24,7 @@ private:
 
 	// Private functions
 	void initVariables();
+	void initGraphicsSettings();
 	void initWindow();
 	void initkeyBinds();
 	void initStates();

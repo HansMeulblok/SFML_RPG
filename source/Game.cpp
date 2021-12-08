@@ -5,49 +5,31 @@
 void Game::initVariables()
 {
     this->window = NULL;
-    this->fullScreen = false;
     this->dt = 0.f;
   
 }
 
+void Game::initGraphicsSettings()
+{
+    this->graphicSettings.loadFromFile("Config/graphics.ini");
+
+
+
+}
+
 void Game::initWindow()
 {
-    std::ifstream ifs("Config/window.ini");
-    this->videoModes = sf::VideoMode::getFullscreenModes();
-    std::string title = "None";
-    sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
-    bool fullscreen = false;
-    unsigned framerate_limit = 120;
-    bool vertical_sync_enabled = false;
-    unsigned antialiasing_level = 0;
-
-    if (ifs.is_open())
-    {
-        std::getline(ifs, title);
-        ifs >> window_bounds.width >> window_bounds.height;
-        ifs >> fullscreen;
-        ifs >> framerate_limit;
-        ifs >> vertical_sync_enabled;
-        ifs >> antialiasing_level;
-
-    }
-
-    ifs.close();
-    this->fullScreen = fullscreen;
    
-
-    this->windowSettings.antialiasingLevel = antialiasing_level;
-   
-    if (this->fullScreen)
+    if (this->graphicSettings.fullscreen)
     {
-        this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Fullscreen, this->windowSettings);
+        this->window = new sf::RenderWindow(this->graphicSettings.resolution, this->graphicSettings.title, sf::Style::Fullscreen, this->graphicSettings.contextSettings);
     }
     else
     {
-        this->window = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, this->windowSettings);
+        this->window = new sf::RenderWindow(this->graphicSettings.resolution, this->graphicSettings.title, sf::Style::Titlebar | sf::Style::Close, this->graphicSettings.contextSettings);
     }
-    this->window->setFramerateLimit(framerate_limit);
-    this->window->setVerticalSyncEnabled(vertical_sync_enabled);
+    this->window->setFramerateLimit(this->graphicSettings.frameRateLimit);
+    this->window->setVerticalSyncEnabled(this->graphicSettings.vSync);
 }
 
 void Game::initkeyBinds()
@@ -76,7 +58,7 @@ void Game::initkeyBinds()
 
 void Game::initStates()
 {
-    this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states));
+    this->states.push(new MainMenuState(this->window, this->graphicSettings, &this->supportedKeys, &this->states));
 }
 
 
@@ -84,6 +66,7 @@ void Game::initStates()
 Game::Game()
 {
 	this->initVariables();
+    this->initGraphicsSettings();
 	this->initWindow();
     this->initkeyBinds();
     this->initStates();
