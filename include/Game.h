@@ -11,6 +11,7 @@ private:
 	
 
 	GraphicsSettings graphicSettings;
+	StateData stateData;
 	sf::RenderWindow* window;
 	sf::Event ev;
 
@@ -22,11 +23,14 @@ private:
 	std::stack<State*> states;
 	std::map<std::string, int> supportedKeys;
 
+	float gridSize;
+
 	// Private functions
 	void initVariables();
 	void initGraphicsSettings();
 	void initWindow();
 	void initkeyBinds();
+	void initStateData();
 	void initStates();
 
 public:

@@ -13,7 +13,7 @@ private:
 	sf::Vector2f playerDir;
 	sf::Font font;
 	PauseMenu* pmenu;
-	TileMap map;
+	TileMap* tileMap;
 
 	// Functions
 	void initkeyBinds();
@@ -21,9 +21,10 @@ private:
 	void initFonts();
 	void initPlayers();
 	void initPauseMenu();
+	void initTileMap();
 
 public:
-	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
+	GameState(StateData* state_data);
 	virtual ~GameState();
 
 	// functions
